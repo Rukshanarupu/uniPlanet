@@ -44,6 +44,7 @@ async function run() {
     app.get('/universities', async (req, res) => {
       const result = collegesCollection.find({}).toArray(); //why {}
       res.send(result);
+      // console
     })
 
     // for category section
