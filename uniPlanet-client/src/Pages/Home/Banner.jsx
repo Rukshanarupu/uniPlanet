@@ -5,63 +5,55 @@ import { fadeIn } from "../../variants";
 
 const Banner = () => {
     return (
-        <div className="container mx-auto ">
-           <div className='carousel  md:h-[600px] '>
-                <div id="slide1" className="carousel-item relative w-full grid md:grid-cols-2">
+        <div className='bg-teal-50 pb-5'>
+            
+            <div className='container mx-auto'>
+                <div className=' grid md:grid-cols-2 gap-5 items-center'>
+                <motion.div
+                    variants={fadeIn("left", 0.3)}
+                    initial="hidden"
+                    whileInView={"show"}
+                    viewport={{ once: false, amount: 0.3 }}
+                >
+                    <h1 className="mb-5 text-5xl font-bold font-forum">We maximize your chance of getting admitted to your chosen universities</h1>
+                    <p className="mb-5 text-2xl">The smart alternative to applying direct for a degree abroad and the easy way to find programs that match your eligibility and aspirations</p>
+                    <Link to='./login' className="btn my-btn mb-3">Explore More</Link>
+                </motion.div>
                 <motion.div
                     variants={fadeIn("right", 0.3)}
                     initial="hidden"
                     whileInView={"show"}
                     viewport={{ once: false, amount: 0.3 }}
                 >
-                   <div className=''>
-                    <img src='https://raw.githubusercontent.com/Rukshanarupu/assignment-image-link/main/Assignment-11-img/slider-1.webp' className="w-full rounded-xl" />
+                    <img src="https://images.studee.com/illustrations/illustration__feature--homepage-hero.png?ixlib=js-2.3.2&auto=format&w=1152&crop=fit&q=30" className="w-[90%]" alt="" />
+                </motion.div>
                 </div>
-                   </motion.div>
-                    <div className=''>
-                        <div className=" text-white space-y-7 md:w-2/4 ml-20">
-                            <h1 className="mb-5 text-7xl font-bold font-forum">We maximize your chance of getting admitted to your chosen universities</h1>
-                            <p className="mb-5">Special Offer for New Customer</p>
-                            <Link to='./login' className="btn my-btn mb-3">Explore More</Link>
-                        </div>
+
+                <div className='md:flex justify-between gap-10 lg:gap-24 bg-white p-5 px-10 border-s-4 border-primary shadow-xl mb-5 mt-10'>
+                    <div className="form-control">
+                        <label className="label">
+                            <h1 className="label-text text-2xl">Location</h1>
+                        </label>
+                        <input type="text" placeholder="Enter a country, city or university" className="input border-secondary h-[55px] w-full lg:w-[400px]" />
+                        
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text text-2xl">Subject</span>
+                        </label>
+                        <input type="text" placeholder="Enter your Subject" className="input border-secondary h-[55px] w-full lg:w-[400px]" />
+                        
                     </div>
                     
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide5" className="btn btn-circle bg-primary hover:bg-secondary">❮</a> 
-                        <a href="#slide2" className="btn btn-circle bg-primary ml-2 hover:bg-secondary">❯</a>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text text-2xl text-white">submit</span>
+                        </label>
+                        <button className="btn border-secondary h-[55px] w-[150px] capitalize bg-primary hover:bg-secondary hover:text-black" > Fine Colleges</button>
+                        
                     </div>
-                </div> 
-                <div id="slide2" className="carousel-item relative w-full">
-                    <img src='https://raw.githubusercontent.com/Rukshanarupu/assignment-image-link/main/Assignment-11-img/slider-2.webp' className="w-full" />
-                    <div className='absolute rounded-xl flex items-center h-full w-full bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
-                        <div className=" text-white space-y-7 md:w-2/4 ml-20">
-                            <h1 className="mb-5 text-7xl font-bold font-forum">WATCH THEM GROW </h1>
-                            <p className="mb-5">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
-                            <p className='flex'><Link to='./login' className="btn my-btn mb-3">Explore More</Link></p>
-                        </div>
-                    </div>
-                    
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide1" className="btn btn-circle bg-primary hover:bg-secondary">❮</a> 
-                        <a href="#slide3" className="btn btn-circle bg-primary ml-2 hover:bg-secondary">❯</a>
-                    </div>
-                </div> 
-                <div id="slide3" className="carousel-item relative w-full">
-                    <img src='https://raw.githubusercontent.com/Rukshanarupu/assignment-image-link/main/Assignment-11-img/slider-1.webp' className="w-full" />
-                    <div className='absolute rounded-xl flex items-center h-full w-full bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
-                        <div className=" text-white space-y-7 md:w-2/4 ml-20">
-                            <h1 className="mb-5 text-7xl font-bold font-forum">Affordable Price For Toy Purchase!</h1>
-                            <p className="mb-5">There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
-                            <p className='flex'><Link to='./login' className="btn my-btn mb-3">Explore More</Link></p>
-                        </div>
-                    </div>
-                    
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide2" className="btn btn-circle bg-primary hover:bg-secondary">❮</a> 
-                        <a href="#slide1" className="btn btn-circle bg-primary ml-2 hover:bg-secondary">❯</a>
-                    </div>
-                </div> 
-           </div>
+                </div>
+            </div>
         </div>
     );
 };

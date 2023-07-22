@@ -4,14 +4,10 @@ import MainLayout from '../Layouts/MainLayout'
 import { createBrowserRouter } from 'react-router-dom';
 import ErrorElement from '../Pages/ErrorElement'
 import Home from '../Pages/Home/Home';
-import Blog from '../Pages/Blog'
 import Terms from '../Pages/Shared/Terms';
-import Contact from '../Pages/Contact';
-import PrivateRoute from './PrivateRoute';
-import MyToys from '../Pages/MyToys/MyToys';
-import ToyDetails from '../Pages/Home/Categories/ToyDetails';
-import AddToys from '../Pages/AddToys';
-import AllToys from '../Pages/AllToys/AllToys';
+import Colleges from '../Pages/Colleges/Colleges';
+import Admission from '../Pages/Admission';
+import MyCollege from '../Pages/myCollege';
 // import
 
 const router = createBrowserRouter([
@@ -25,29 +21,16 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
-        path: "/details/:id",
-        element: <PrivateRoute><ToyDetails></ToyDetails></PrivateRoute>,
-        loader: ({ params }) => fetch(`https://animal-toy-market.vercel.app/allToys/${params.id}`),
+        path: '/college',
+        element: <Colleges></Colleges>
       },
       {
-        path: "addToy",
-        element: <PrivateRoute><AddToys></AddToys></PrivateRoute>,
+        path: '/admission',
+        element: <Admission></Admission>
       },
       {
-        path: "/toys",
-        element: <AllToys></AllToys>,
-      },
-      {
-        path: "/myToy",
-        element: <PrivateRoute><MyToys></MyToys></PrivateRoute>,
-      },
-      {
-        path: 'blog',
-        element: <Blog></Blog>
-      },
-      {
-        path: 'contact',
-        element: <Contact></Contact>
+        path: '/myCollege',
+        element: <MyCollege></MyCollege>
       },
       {
         path: 'login',
