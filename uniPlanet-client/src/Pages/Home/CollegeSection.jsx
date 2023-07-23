@@ -25,8 +25,8 @@ const CollegeSection = () => {
     return (
         <div>
         <div className="grid md:grid-cols-2 gap-7 my-5">
-          {colleges?.map((college, id) => (
-            <College key={id} college={college}></College>
+          {colleges?.map((college, _id) => (
+            <College key={_id} college={college}></College>
           ))}
         </div>
         </div>
@@ -36,19 +36,26 @@ const CollegeSection = () => {
 const College =({college})=>{
     const {user } = useContext(AuthContext);
       console.log(college)
-      const {pictureUrl, name, price, rating, _id}=college || {}
+      const {image, name, admission_date, sports_facility, events_details, _id}=college || {}
       const warning = () => toast.error('You have to log in first to view details');
     return(
       <div className="md:flex-row flex-col card card-side bg-sky-100 shadow-xl">
         <div className="w-full h-64 flex items-center justify-center">
-          <figure><img className="w-[300px] h-[200px]" src={pictureUrl} alt="Movie"/></figure>
+          <figure><img className="w-[300px] h-[200px]" src={image} alt="Movie"/></figure>
         </div>
         <div className="card-body">
           <div>
-            <h2 className="card-title">{name}</h2>
-            <p className="font-semibold">Price: <span className="text-orange-500">{price} taka</span></p>
+            <h2 className="card-title text-3xl">{name}</h2>
+              <h3 className=" text-xl">Admission Date: <span className="text-orange-500">{ admission_date } </span></h3>
+            <p className="font-semibold">Sports Category: <span className="text-orange-500">{ sports_facility.category } taka</span></p>
           </div>
-          <h3 className="text-xs">Rating: <span className="text-orange-500">{rating}</span></h3>
+          <h3 className="text-xs"> Events details: <span className="text-orange-500">{ 
+     events_details.map((event, _id) => (
+            <div key={_id}>
+                <p>{events_details.title}</p>
+            </div>
+          )) }
+          </span></h3>
           <div className="card-actions justify-end">
             {
               user ?
