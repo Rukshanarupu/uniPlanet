@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
@@ -11,8 +11,9 @@ const Login = () => {
     const [success, setSuccess] = useState('');
     const navigate =useNavigate()
     const location = useLocation()
+    const emailRef = useRef()
+    
     // console.log(location)
-
     const from =location.state?.from?.pathclassName || '/'
 
     const handleLoginWithMail=event=>{
@@ -69,7 +70,22 @@ const Login = () => {
         });
     }
 
+  //   handle password reset
+  const handleReset = () => {
+    const email = emailRef.current.value
 
+    resetPassword(email)
+      .then(() => {
+        toast.success('Please check your email for reset link')
+        setLoading(false)
+      })
+      .catch(err => {
+        setLoading(false)
+        console.log(err.message)
+        toast.error(err.message)
+      })
+  }
+    
     return (
         <div className='container mx-auto flex flex-col items-center justify-center px-6 py-8 lg:py-0 my-8'>
             <div className="bg-base-200 w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
@@ -101,7 +117,11 @@ const Login = () => {
                                         <label className="text-gray-500">Remember me</label>
                                     </div>
                                 </div>
-                                <a className="text-sm font-medium text-primary-600 hover:underline" href="/login">Forgot password?</a>
+                                <a 
+                                    onClick={handleReset} 
+                                    className="text-sm font-medium text-primary-600 hover:underline" href="">
+                                    Forgot password?
+                                </a>
                             </div>
                             <button type="submit" className="w-full text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
                             <div className="flex flex-col">
@@ -111,7 +131,7 @@ const Login = () => {
                                         </div>
                                     </div>
                                     <div className="relative flex justify-center">
-                                        <span className="bg-white px-4 text-sm text-gray-500">Or login with</span>
+                                        <span className="bg-white px-4 text-sm text-gray-500">Or Login with social accounts</span>
                                     </div>
                                 </div>
                                 <div className="flex justify-center items-center gap-4 mt-2">
