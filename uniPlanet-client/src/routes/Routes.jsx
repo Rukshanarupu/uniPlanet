@@ -5,9 +5,11 @@ import { createBrowserRouter } from 'react-router-dom';
 import ErrorElement from '../Pages/ErrorElement'
 import Home from '../Pages/Home/Home';
 import Terms from '../Pages/Shared/Terms';
-import Colleges from '../Pages/Colleges/Colleges';
-import Admission from '../Pages/Admission';
+import Colleges from '../Pages/Colleges';
+import Admission from '../Pages/Admission/Admission';
 import MyCollege from '../Pages/myCollege';
+import CollegeCardDetails from '../Pages/Home/CollegeCard/CollegeCardDetails';
+import PrivateRoute from './PrivateRoute';
 // import
 
 const router = createBrowserRouter([
@@ -22,8 +24,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <PrivateRoute>< CollegeCardDetails ></ CollegeCardDetails ></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/universities/${params.id}`),
+        element: <PrivateRoute><CollegeCardDetails></CollegeCardDetails></PrivateRoute>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/universities/${params.id}`),
       },
       {
         path: '/college',
@@ -31,7 +33,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/admission',
-        element: <Admission></Admission>
+        element: <Admission></Admission>,
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/universities`),
       },
       {
         path: '/myCollege',

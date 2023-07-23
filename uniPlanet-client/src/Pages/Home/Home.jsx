@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import CollegeSection from './CollegeSection';
+import CollegeSection from './CollegeCard/CollegeSection';
 
 AOS.init();
 
