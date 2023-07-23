@@ -10,6 +10,7 @@ import Admission from '../Pages/Admission/Admission';
 import MyCollege from '../Pages/myCollege';
 import CollegeCardDetails from '../Pages/Home/CollegeCard/CollegeCardDetails';
 import PrivateRoute from './PrivateRoute';
+import AdmissionForm from '../Pages/Admission/AdmissionForm';
 // import
 
 const router = createBrowserRouter([
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
         path: '/admission',
         element: <Admission></Admission>,
         loader: () => fetch(`${import.meta.env.VITE_API_URL}/universities`),
+      },
+      {
+        path: "/admissionDetails/:id",
+        element: <AdmissionForm></AdmissionForm>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/universities/${params.id}`),
       },
       {
         path: '/myCollege',

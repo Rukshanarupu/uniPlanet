@@ -4,81 +4,82 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import { useContext, useState } from "react";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { FaAngleRight } from "react-icons/fa";
+import { useLoaderData } from "react-router-dom";
 
 const AdmissionForm = () => {
+  const detailsLoaded = useLoaderData();
+  console.log(detailsLoaded)
 
-    const { user , loading} = useContext(AuthContext);
-    const [dob, setDob] = useState('');
-    const [uploadButtonText, setUploadButtonText] = useState('Upload Image')
-    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
-  
-    const handleChange = (e) => {
-      setDob(e.target.value);
-    };
-  
-    if (loading) {
-      return <LoadingSpinner />;
+  const { user , loading} = useContext(AuthContext);
+  const [dob, setDob] = useState('');
+  const [uploadButtonText, setUploadButtonText] = useState('Upload Image')
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
+
+  const handleChange = (e) => {
+    setDob(e.target.value);
+  };
+
+  if (loading) {
+    return <LoadingSpinner />;
   }
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const form = event.target;
-      const name = form.name.value;
-      const email = user?.email;
-      const image = form.image.files[0]
-      const subject = form.subject.value;
-      const number = form.number.value;
-      const address = form.address.value;
-  
-      const formData = new FormData();
-      formData.append('image', image)
-      fetch(img_hosting_url, {
-          method: 'POST',
-          body: formData
-      })
-      .then(res => res.json())
-      .then(imgResponse => {
-          if(imgResponse.success){
-              const imgURL = imgResponse.data.display_url;
-              const candidate = {
-              name: name,
-              email: email,
-              photo: imgURL,
-              subject: subject,
-              number: number,
-              address: address,
-              dob: dob
-              };
-              console.log(candidate);
-              
-  
-              fetch(`${import.meta.env.VITE_API_URL}/postedAdmissionInfo`, {
-                  method: "POST",
-                  headers: { "content-type": "application/json" },
-                  body: JSON.stringify(candidate),
-                })
-                  .then((res) => res.json())
-                  .then((data) => {
-                      setUploadButtonText('Uploaded!')
-                      console.log(data);
-                      if (data.insertedId) {
-                          Swal.fire({
-                              title: "Success!",
-                              text: "College added Successfully",
-                              icon: "success",
-                              confirmButtonText: "Cool",
-                          });
-                      }
-                  });
-          }
-      })
-      
-     
-    };
-  
-    const handleUploadImage = image => {
-      // console.log(image)
-      setUploadButtonText(image.name)
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = user?.email;
+    const image = form.image.files[0]
+    const subject = form.subject.value;
+    const number = form.number.value;
+    const address = form.address.value;
+
+    const formData = new FormData();
+    formData.append('image', image)
+    fetch(img_hosting_url, {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(imgResponse => {
+        if(imgResponse.success){
+            const imgURL = imgResponse.data.display_url;
+            const candidate = {
+            name: name,
+            email: email,
+            photo: imgURL,
+            subject: subject,
+            number: number,
+            address: address,
+            dob: dob
+            };
+            console.log(candidate);
+            
+
+            fetch(`${import.meta.env.VITE_API_URL}/postedAdmissionInfo`, {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(candidate),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                    setUploadButtonText('Uploaded!')
+                    console.log(data);
+                    if (data.insertedId) {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "College added Successfully",
+                            icon: "success",
+                            confirmButtonText: "Cool",
+                        });
+                    }
+                });
+        }
+    })     
+  };
+
+  const handleUploadImage = image => {
+    // console.log(image)
+    setUploadButtonText(image.name)
+  }
 
     return (
         <div className="mt-16 container mx-auto">
