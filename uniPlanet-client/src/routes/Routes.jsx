@@ -21,6 +21,11 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
+        path: "/details/:id",
+        element: <PrivateRoute>< CollegeCardDetails ></ CollegeCardDetails ></PrivateRoute>,
+        loader: ({ params }) => fetch(`http://localhost:5000/allToys/${params.id}`),
+      },
+      {
         path: '/college',
         element: <Colleges></Colleges>
       },
