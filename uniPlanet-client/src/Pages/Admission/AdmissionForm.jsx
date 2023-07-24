@@ -6,15 +6,14 @@ import LoadingSpinner from "../Shared/LoadingSpinner";
 import { FaAngleRight } from "react-icons/fa";
 import { useLoaderData } from "react-router-dom";
 
-const AdmissionForm = () => {
+const AdmissionForm = ( => {
   const detailsLoaded = useLoaderData();
-  console.log(detailsLoaded)
-
   const { user , loading} = useContext(AuthContext);
   const [dob, setDob] = useState('');
   const [uploadButtonText, setUploadButtonText] = useState('Upload Image')
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
-
+console.log(detailsLoaded)
+  
   const handleChange = (e) => {
     setDob(e.target.value);
   };
@@ -85,7 +84,7 @@ const AdmissionForm = () => {
         <div className="mt-16 container mx-auto">
           <div className="grid md:grid-cols-2">
             <div className="bg-[#1f4363] text-white text-center p-10">
-                <h2 className="text-[62px]">Request an Admission</h2>
+                <h2 className="text-[62px]">Admission Form for {selectedCollege.name}</h2>
                 <p>Fusce purus mauris, blandit vitae purus eget, viverra volutpat nibh. Nam in elementum nisi, a placerat nisi. Quisque ullamcorper magna in odio rhoncus semper.Sed nec ultricies velit. Aliquam non massa id enim ultrices aliquet a ac
                     tortor.
                 </p>
