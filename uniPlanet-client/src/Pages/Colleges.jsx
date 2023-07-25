@@ -22,7 +22,7 @@ const Colleges = () => {
         return <LoadingSpinner />;
     }
 
-    console.log(colleges)
+    // console.log(colleges)
 
     return (
         <div className="container mx-auto">
@@ -37,7 +37,7 @@ const Colleges = () => {
 
 const College =({college})=>{
     const {user } = useContext(AuthContext);
-    console.log(college)
+    // console.log(college)
     const {image, name, admission_date, number_of_research, research_history, _id, college_rating}=college || {}
     const warning = () => toast.error('You have to log in first to view details');
 

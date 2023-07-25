@@ -7,13 +7,15 @@ import Home from '../Pages/Home/Home';
 import Terms from '../Pages/Shared/Terms';
 import Colleges from '../Pages/Colleges';
 import Admission from '../Pages/Admission/Admission';
-import MyCollege from '../Pages/myCollege';
+import MyCollege from '../Pages/myCollegeInfo/MyCollege';
 import CollegeCardDetails from '../Pages/Home/CollegeCard/CollegeCardDetails';
 import PrivateRoute from './PrivateRoute';
 import AdmissionForm from '../Pages/Admission/AdmissionForm';
-// import
+import CollegeEdit from '../Pages/myCollegeInfo/CollegeEdit';
+import Profile from '../Pages/Profile';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+[
   {
     path: '/',
     element: <MainLayout></MainLayout>,
@@ -47,8 +49,17 @@ const router = createBrowserRouter([
         element: <MyCollege></MyCollege>
       },
       {
+        path: '/editInfo/:id',
+        element: <CollegeEdit></CollegeEdit>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/postedAdmissionInfo/${params.id}`),
+      },
+      {
         path: 'login',
         element: <Login></Login>
+      },
+      {
+        path: `/profile/:email`,
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>
       },
       {
         path: 'signup',

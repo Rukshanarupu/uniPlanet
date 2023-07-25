@@ -2,11 +2,21 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const CollegeSection = () => {
     const [colleges, setColleges] = useState([]);
     const {loading } = useContext(AuthContext);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    // const params = useSearchParams();
+    const query = params.get('search');
+        useEffect(() => {
+      console.log(params);
+      setSearchQuery(query || "");
+    }, []);
 
     useEffect(() => {
       fetch(`${import.meta.env.VITE_API_URL}/universities`)
@@ -16,6 +26,10 @@ const CollegeSection = () => {
         setColleges(showLimitedColleges);
       });
     }, []);
+
+    const filteredColleges = colleges.filter((college) =>
+      college.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   
     if (loading) {
         return <LoadingSpinner />;
@@ -25,7 +39,7 @@ const CollegeSection = () => {
     return (
         <div className="container mx-auto">
           <div className="grid md:grid-cols-3 gap-7 my-5">
-            {colleges?.map((college, _id) => (
+            {filteredColleges?.map((college, _id) => (
               <College key={_id} college={college}></College>
             ))}
           </div>
